@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Created by ApplusForm.com on 2014.3.26 
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+ --> 
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+
+	<UILAYOUT portrait="720,1230" landscape="720,1230">
+		<WINDOW layout="0,0,720,1230" defaultImg="logo.png" />
+		<LABEL layout="0,1150,720,80" text="loading..." textColor="#000000" textShadow="#80808080" textAlign="center" fontSize="40" />
+	</UILAYOUT>
+	
+	<!-- 처음 logo 화면에서 main 으로 이동 -->
+	<CMD cmd="root.navigation.selectedItem='main'" delay="1500" />
+</MOML>

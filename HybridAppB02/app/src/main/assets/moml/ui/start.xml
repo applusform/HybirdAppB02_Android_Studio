@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Created by ApplusForm.com on 2014.3.26 
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+ --> 
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+
+	<UILAYOUT portrait="720,1230" landscape="720,1230">
+		<!-- ### intro 없이 바로 시작하려면 selectedIte="main" 으로 변경하십시오. -->
+		<NAVIGATIONCONTAINER id="navigation" layout="0,0,720,1230" selectedItem="intro">
+			<VIEWITEM id="intro" src="intro.xml" transitionInEffect="none" transitionOutEffect="none" />
+			<VIEWITEM id="main" src="main.xml" transitionInEffect="mosaic:random" transitionOutEffect="none" />
+		</NAVIGATIONCONTAINER>
+	</UILAYOUT>
+
+	<!-- menu key를 눌렀을 때 -->
+	<FUNCTION id="onMenuKey">
+		<CMD condition="navigation.selectedItem == 'main'" cmd="function.navigation.main.onMenuKey" />
+	</FUNCTION>
+</MOML>

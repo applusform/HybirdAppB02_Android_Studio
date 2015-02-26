@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Created by ApplusForm.com on 2014.3.26
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<UILAYOUT portrait="720,1230" landscape="720,1230">
+		<AGATEWEBVIEW id="webView" layout="0,0,720,1230" homePage="http://google.com/shopping" src="{caller.homePage}" controls="none" supportZoom="false">
+			<LINKMAP>
+				<LINK url="*" delay="1"/> <!-- 페이지 이동시 깜빡임 방지. -->
+				<LINK url="*" onFinish="function.updateToolbar"/>
+			</LINKMAP>
+		</AGATEWEBVIEW>
+		
+		<!-- ### 하단 툴바를 완전히 없애려면 visible="invisible" 로 변경하십시오. -->
+		<WINDOW id="toolbar" layout="0,1180,720,110" visible="visible">
+			<WINDOW layout="0,50,720,60" align="linear:horizontal|vCenter|hJustify" defaultImg="#a0c0c0c0" padding="0,0,60,0">
+				<BUTTON id="back" layout="60,60" margin="10,0,10,0" defaultImg="webbackgray.png" onClick="webView.back"/>
+				<BUTTON id="forward" layout="60,60" margin="10,0,10,0" defaultImg="webforgray.png" onClick="webView.forward"/>
+				<BUTTON layout="60,60" margin="10,0,10,0" defaultImg="webrefresh.png" onClick="webView.refresh"/>
+				<BUTTON layout="60,60" margin="10,0,10,0" defaultImg="webhome.png" onClick="webView.clear; webView.src=webView.homePage"/>
+				<BUTTON layout="60,60" margin="10,0,10,0" defaultImg="exit.png" onClick="device.systemPopup('', '프로그램을 종료하시겠습니까?', '확인:application.terminate', '취소', '')"/>
+			</WINDOW>
+			<WINDOW layout="660,0,60,110" onClick="function.onMenuKey" /> <!-- 버튼 위아래 근처를 터치해도 동작하도록 한다.-->
+			<BUTTON id="gripper" layout="660,20,60,30" defaultImg="gripperDown.png" onClick="function.onMenuKey"/>
+		</WINDOW>
+	</UILAYOUT>
+
+	<!-- ### 하단 툴바를 아래로 감춘상태로 시작하려면 아래 명령을 지우십시오. -->
+	<CMD cmd="function.onMenuKey" delay="1500"/>
+
+	<!-- menu key를 눌렀을 때 -->
+	<FUNCTION id="onMenuKey">
+		<CMD condition="toolbar.top lt 1150">
+			<CMD cmd="animation.move('toolbar', 0, 60, 'easeIn3', 300, '')"/>
+			<CMD cmd="gripper.defaultImg='gripperUp.png'"/>
+			<ELSECMD cmd="animation.move('toolbar', 0, -60, 'easeIn3', 300, '')"/>
+			<ELSECMD cmd="gripper.defaultImg='gripperDown.png'"/>
+		</CMD>
+	</FUNCTION>
+
+	<FUNCTION id="updateToolbar">
+		<CMD condition="webView.canBack" cmd="back.defaultImg='webback.png'" elseCmd="back.defaultImg='webbackgray.png'"/>
+		<CMD condition="webView.canForward" cmd="forward.defaultImg='webfor.png'" elseCmd="forward.defaultImg='webforgray.png'"/>
+	</FUNCTION>
+</MOML>
